@@ -1,0 +1,29 @@
+{
+  "name": "black-market-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "cross-env EXPO_NO_DOTENV=1 expo start",
+    "prebuild": "cross-env EXPO_NO_DOTENV=1 pnpm expo prebuild",
+    "android": "cross-env APP_ENV=development EXPO_NO_DOTENV=1 expo run:android",
+    "ios": "cross-env EXPO_NO_DOTENV=1 expo run:ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.23.9",
+    "@types/react": "~18.2.45",
+    "expo": "~50.0.7",
+    "expo-status-bar": "~1.11.1",
+    "nativewind": "^2.0.10",
+    "react": "18.2.0",
+    "react-native": "0.73.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.35.0",
+    "tailwindcss": "3.3.2",
+    "typescript": "^5.1.6"
+  }
+}
