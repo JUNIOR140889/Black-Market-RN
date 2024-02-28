@@ -1,4 +1,4 @@
-import { Text, View } from "@/ui/core"
+import { Text, View } from '../../../ui/core'
 
 export const HomeScreen = () => {
     return (<View>
