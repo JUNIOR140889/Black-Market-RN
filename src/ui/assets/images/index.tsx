@@ -1,4 +1,6 @@
 const images = {
+    backgroundAuth: () => require('./background-auth/background-auth.png'),
+    logoBlackMarket: () => require('./logo-black-market/logo-black-market.png'),
     addPlus: () => require('./add-plus/add-plus.png'),
   };
   
@@ -6,4 +8,3 @@ const images = {
   export default {
     ...images,
   };
-  

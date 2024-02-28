@@ -1,7 +1,7 @@
 import type { Theme } from '@react-navigation/native';
 import { DefaultTheme } from '@react-navigation/native';
 
-import { colors } from '@/ui/theme';
+import { colors } from '../ui/theme';
 
 const LightTheme: Theme = {
   ...DefaultTheme,
