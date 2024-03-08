@@ -7,13 +7,13 @@ import type { ComponentType } from 'react';
 import * as React from 'react';
 import type { SvgProps } from 'react-native-svg';
 
-import { HomeScreen } from '@/modules/home/screens/home-screen';
-import colors from '@/ui/theme/colors';
-import { SvgIcon } from '@/ui/core/icon';
+import { HomeScreen } from '../modules/home/screens/home-screen';
+import colors from '../ui/theme/colors';
+import { SvgIcon } from '../ui/core/icon';
 
 import type { MainStackScreenProps } from './types';
 
-import { Text, View } from "@/ui/core"
+import { Text, View } from "../ui/core"
 
 type TabParamList = {
   Home: undefined;
