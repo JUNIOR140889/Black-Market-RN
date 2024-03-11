@@ -3,6 +3,8 @@ import { TouchableOpacity } from 'react-native'
 import { Image, Text, View, ImageBackground, SafeAreaView, Button, TextInput } from '../../../ui/core'
 import images from '../../../ui/assets/images';
 import type { AuthStackScreenProps } from '../../../navigation/types';
+import { useState } from 'react';
+
 
 type ScreenProps = AuthStackScreenProps<'Login'>;
 
@@ -12,22 +14,25 @@ export type UserRequest = {
 }
 
 export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
-  const { mutate } = useSignIn();
-  const handle = ({email, password}: UserRequest) => {
-    //hideNotification();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    const request = { user: {email: email, password: password}};
-
-    mutate(request, {
-      onSuccess: response => {
-        console.log('success')
-        //signIn(response);
-      },
-      onError: error => {
-        console.log('error')
-      },
-    });
-  };
+    const { mutate } = useSignIn();
+    const handle = () => {
+      //hideNotification();
+  
+      const request = { user: {email: email, password: password}};
+  
+      mutate(request, {
+        onSuccess: response => {
+          console.log('success')
+          //signIn(response);
+        },
+        onError: error => {
+          console.log('error')
+        },
+      });
+    };
 
   return (
     <ImageBackground className='flex-1' resizeMode='stretch' source={images.backgroundAuth()}>
@@ -36,18 +41,17 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
           <Image source={images.logoBlackMarket()} className='h-8 w-48'></Image>
           <View className='w-full mt-8'>
             <Text variant='body1-small'>Email</Text>
-            <TextInput placeholder='Type your email or telephone'></TextInput>
+            <TextInput value={email} onChangeText={setEmail} placeholder='Type your email or telephone'></TextInput>
             <Text variant='body1-small' className='mt-4'>Password</Text>
-            <TextInput secureTextEntry={true} placeholder='Type your password' ></TextInput>
+            <TextInput value={password} onChangeText={setPassword} secureTextEntry={true} placeholder='Type your password' ></TextInput>
           </View>
           <Button
           variant='primary'
           size='large'
           className='mt-4'
           label='Log In'
-          onPress={
-            () => handle({'email': 'junior.sancho14@hotmail.com', 'password': '123456'})
-          }>
+          onPress={() => handle()}
+          >
           </Button>
           <TouchableOpacity>
             <Text className='mt-4 text-primary-800'>I forgot my password</Text>
