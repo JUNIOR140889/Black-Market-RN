@@ -1,3 +1,4 @@
+import { useSignIn } from '../../../api/signin';
 import { TouchableOpacity } from 'react-native'
 import { Image, Text, View, ImageBackground, SafeAreaView, Button, TextInput } from '../../../ui/core'
 import images from '../../../ui/assets/images';
@@ -5,7 +6,29 @@ import type { AuthStackScreenProps } from '../../../navigation/types';
 
 type ScreenProps = AuthStackScreenProps<'Login'>;
 
+export type UserRequest = {
+  email: string,
+  password: string
+}
+
 export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
+  const { mutate } = useSignIn();
+  const handle = ({email, password}: UserRequest) => {
+    //hideNotification();
+
+    const request = { user: {email: email, password: password}};
+
+    mutate(request, {
+      onSuccess: response => {
+        console.log('success')
+        //signIn(response);
+      },
+      onError: error => {
+        console.log('error')
+      },
+    });
+  };
+
   return (
     <ImageBackground className='flex-1' resizeMode='stretch' source={images.backgroundAuth()}>
       <View className='p-8 pt-16 gap-4'>
@@ -17,7 +40,15 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
             <Text variant='body1-small' className='mt-4'>Password</Text>
             <TextInput secureTextEntry={true} placeholder='Type your password' ></TextInput>
           </View>
-          <Button variant='primary' size='large' className='mt-4' label='Log In'></Button>
+          <Button
+          variant='primary'
+          size='large'
+          className='mt-4'
+          label='Log In'
+          onPress={
+            () => handle({'email': 'junior.sancho14@hotmail.com', 'password': '123456'})
+          }>
+          </Button>
           <TouchableOpacity>
             <Text className='mt-4 text-primary-800'>I forgot my password</Text>
           </TouchableOpacity>
