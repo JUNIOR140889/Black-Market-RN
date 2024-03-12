@@ -51,6 +51,7 @@
     "app-icon-badge": "^0.0.15",
     "axios": "^1.6.7",
     "clsx": "^2.0.0",
+    "depcheck": "^1.4.7",
     "expo": "~49.0.13",
     "expo-av": "~13.4.1",
     "expo-build-properties": "~0.8.3",

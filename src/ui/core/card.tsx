@@ -9,14 +9,14 @@ import { View } from './view';
 const cardVariants = {
   default: {
     container: 'bg-primary-100/30',
-    title: 'text-primary-500',
+    title: 'text-primary-900',
     message: 'text-primary-500',
     left: colors.primary[500],
     right: colors.primary[500],
   },
   error: {
     container: 'bg-danger-100',
-    title: 'text-danger-900',
+    title: 'text-danger-900 text-base',
     message: 'text-danger-900',
     left: colors.danger[900],
     right: colors.danger[900],

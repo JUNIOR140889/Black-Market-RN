@@ -12,6 +12,37 @@
       "ok": "OK",
       "save": "Save",
       "skip": "Skip"
+    },
+    "labels": {
+      "email": "Email",
+      "password": "Password",
+      "forgot_password": "I forgot my password",
+      "without_account": "Don't have an account",
+      "sign_up": "Sign up",
+      "log_in": "Log in",
+      "already_have_account": "Already have an account? "
+    },
+    "errors": {
+      "credentials": " Invalid credentials",
+      "invalid_email": " Invalid email",
+      "empty_input": " Please complete the labels",
+      "repeated_email": " Email already taken"
+    },
+    "success": {
+      "login_success": " Success"
+    },
+    "place_holders": {
+      "email_input": "Type your email or telephone",
+      "password_input": "Type your password"
+    },
+    "data_agreement": {
+      "links": {
+          "data_policy": "Data Policy",
+          "cookies_policy": "Cookies Policy"
+      },
+      "first": "By signing up, you accept the ",
+      "second": " and the "
     }
+
   }
 }
