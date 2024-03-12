@@ -15,6 +15,7 @@
     },
     "labels": {
       "email": "Email",
+      "name" : "Name",
       "password": "Password",
       "forgot_password": "I forgot my password",
       "without_account": "Don't have an account",
@@ -33,6 +34,7 @@
     },
     "place_holders": {
       "email_input": "Type your email or telephone",
+      "name_input": "Type your name",
       "password_input": "Type your password"
     },
     "data_agreement": {

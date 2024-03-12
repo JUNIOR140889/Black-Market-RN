@@ -32,7 +32,6 @@ export const SignUpScreen = ({ navigation: { navigate } }: ScreenProps) => {
           title: common.errors.empty_input,
         }
       })
-      console.log('email invalido')
       return  
     }
 
@@ -43,7 +42,6 @@ export const SignUpScreen = ({ navigation: { navigate } }: ScreenProps) => {
           title: common.errors.invalid_email,
         }
       })
-      console.log('email invalido')
       return
     }
 
@@ -55,7 +53,6 @@ export const SignUpScreen = ({ navigation: { navigate } }: ScreenProps) => {
             title: common.success.login_success,
           },
         });
-        console.log('success');
         signIn(response);
       },
       onError: error => {
@@ -65,7 +62,6 @@ export const SignUpScreen = ({ navigation: { navigate } }: ScreenProps) => {
             title: common.errors.repeated_email
           }
         })
-        console.log('error');
       },
     });
   };
@@ -78,8 +74,8 @@ export const SignUpScreen = ({ navigation: { navigate } }: ScreenProps) => {
           <View className='w-full mt-8'>
             <Text variant='body1-small'>{common.labels.email}</Text>
             <TextInput autoCapitalize='none' value={email} onChangeText={setEmail} placeholder={common.place_holders.email_input}></TextInput>
-            <Text variant='body1-small' className='mt-4'></Text>
-            <TextInput autoCapitalize='none' value={name} onChangeText={setName} placeholder={common.place_holders.email_input}></TextInput>
+            <Text variant='body1-small' className='mt-4'>{common.labels.name}</Text>
+            <TextInput autoCapitalize='none' value={name} onChangeText={setName} placeholder={common.place_holders.name_input}></TextInput>
             <Text variant='body1-small' className='mt-4'>{common.labels.password}</Text>
             <TextInput value={password} onChangeText={setPassword} secureTextEntry={true} placeholder={common.place_holders.password_input}></TextInput>
           </View>
