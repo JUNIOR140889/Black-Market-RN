@@ -81,7 +81,7 @@ dependencies:
     specifier: ^2.0.1
     version: 2.0.1
   i18next:
-    specifier: ^22.4.11
+    specifier: ^22.5.1
     version: 22.5.1
   lodash.memoize:
     specifier: ^4.1.2
@@ -102,7 +102,7 @@ dependencies:
     specifier: ^7.43.5
     version: 7.50.1(react@18.2.0)
   react-i18next:
-    specifier: ^12.2.0
+    specifier: ^12.3.1
     version: 12.3.1(i18next@22.5.1)(react-dom@18.2.0)(react-native@0.72.6)(react@18.2.0)
   react-native:
     specifier: 0.72.6

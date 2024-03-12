@@ -11,6 +11,11 @@ const colors = {
     800: '#5C6273',
     900: '#4D525E',
   },
+  warning: {
+    100: '#FEFCBF',
+    500: '#CD8B28',
+    900: '#9B6616',
+  },
   primary: {
     50: '#F6F2FE',
     100: '#D4BFF9',
@@ -30,7 +35,12 @@ const colors = {
   },
   link:{
     100: '#076CE0'
-  }
+  },
+  info: {
+    100: '#E3F5FF',
+    500: '#0F62A8',
+    900: '#104979',
+  },
 };
 
 module.exports = {

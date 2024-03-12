@@ -6,7 +6,6 @@ import { AuthNavigator } from './auth-navigator';
 import { MainNavigator } from './main-navigator';
 import { NavigationContainer } from './navigator-container';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-// import { queryClient } from '@/api';
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
 

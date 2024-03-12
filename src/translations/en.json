@@ -1,0 +1,17 @@
+{
+  "common": {
+    "buttons": {
+      "back": "Back",
+      "begin": "Begin",
+      "cancel": "Cancel",
+      "complete": "Complete",
+      "continue": "Continue",
+      "leave": "Leave",
+      "logout": "Logout",
+      "next": "Next",
+      "ok": "OK",
+      "save": "Save",
+      "skip": "Skip"
+    }
+  }
+}
