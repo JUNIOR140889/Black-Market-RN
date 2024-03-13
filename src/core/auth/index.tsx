@@ -56,8 +56,6 @@ const _getAuth = create<AuthState>((set, get) => ({
   },
 }));
 
-export const getAuth = createSelectors(_getAuth);
-
 export const signOut = () => {
   queryClient.removeQueries();
 

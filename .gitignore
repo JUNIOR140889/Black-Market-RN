@@ -20,3 +20,5 @@ ios/
 android/
 
 .idea
+
+.env.development

@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native'
 import { Image, Text, View, ImageBackground, SafeAreaView, Button, TextInput } from '../../../ui/core'
 import images from '../../../ui/assets/images';
 import type { AuthStackScreenProps } from '../../../navigation/types';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   CardNotification,
   hideNotification,
@@ -18,63 +18,68 @@ LogBox.ignoreAllLogs(true)
 type ScreenProps = AuthStackScreenProps<'Login'>;
 
 export type UserRequest = {
-  email: string,
-  password: string
-}
+  email: string;
+  password: string;
+};
 
 export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
-    const { mutate } = useSignIn();
-    const handle = () => {
-      hideNotification();
-  
-      const request = { user: {email: email, password: password}};
-  
-      if (email === '' || password === '') {
-        showNotification({
-          type: 'error',
-          data: {
-            title: common.errors.empty_input,
-          }
-        })
-        console.log('email invalido')
-        return  
-      }
 
-      if (!email.includes('@')) {
-        showNotification({
-          type: 'error',
-          data: {
-            title: common.errors.invalid_email,
-          }
-        })
-        console.log('email invalido')
-        return
-      }
-
-      mutate(request, {
-        onSuccess: response => {
-          console.log('success')
-          signIn(response);
-          showNotification({
-            type: 'info',
-            data: {
-              title: common.success.login_success,
-            },
-          });
-        },
-        onError: error => {
-          showNotification({
-            type: 'error',
-            data: {
-              title: common.errors.credentials,
-            },
-          });
-        },
-      });
+  const { mutate } = useSignIn();
+  const handle = () => {
+    hideNotification();
+    const validateEmail = (email: string) => {
+      return String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        );
     };
+
+    const request = { user: { email: email, password: password } };
+
+    if (email === '' || password === '') {
+      showNotification({
+        type: 'error',
+        data: {
+          title: common.errors.empty_input,
+        }
+      })
+      console.log('email invalido')
+      return  
+    }
+    if (!validateEmail(email)) {
+      showNotification({
+        type: 'error',
+        data: {
+          title: common.errors.invalid_email,
+        }
+      })
+      console.log('email invalido')
+      return
+    }
+    mutate(request, {
+      onSuccess: response => {
+        console.log('success')
+        signIn(response);
+        showNotification({
+          type: 'info',
+          data: {
+            title: common.success.login_success,
+          },
+        });
+      },
+      onError: error => {
+        showNotification({
+          type: 'error',
+          data: {
+            title: common.errors.credentials,
+          },
+        });
+      },
+    });
+  };
 
   return (
     <ImageBackground className='flex-1' resizeMode='stretch' source={images.backgroundAuth()}>
@@ -85,7 +90,7 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
             <Text variant='body1-small' className='mt-4'>{common.labels.email}</Text>
             <TextInput autoCapitalize='none' value={email} onChangeText={setEmail} placeholder={common.place_holders.email_input}></TextInput>
             <Text variant='body1-small' className='mt-4'>{common.labels.password}</Text>
-            <TextInput autoCapitalize='none' value={password} onChangeText={setPassword} secureTextEntry={true} placeholder={common.place_holders.email_input } ></TextInput>
+            <TextInput autoCapitalize='none' value={password} onChangeText={setPassword} secureTextEntry={true} placeholder={common.place_holders.password_input } ></TextInput>
           </View>
           <CardNotification style={{marginTop:10,  height: 50}} />
           <Button
@@ -94,8 +99,7 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
           className='mt-4'
           label='Log In'
           onPress={() => handle()}
-          >
-          </Button>
+           />
           <TouchableOpacity>
             <Text className='mt-4 text-primary-800'>{common.labels.forgot_password}</Text>
           </TouchableOpacity>

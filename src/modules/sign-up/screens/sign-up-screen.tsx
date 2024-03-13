@@ -8,8 +8,6 @@ import { signIn } from '../../../core';
 import { CardNotification, hideNotification, showNotification } from '../../../ui/core/notifications/card-notification';
 import { common } from '../../../translations/en.json'
 import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs(true)
 
 type ScreenProps = AuthStackScreenProps<'SignUp'>;
 

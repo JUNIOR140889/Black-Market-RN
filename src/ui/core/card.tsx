@@ -67,13 +67,13 @@ export const Card = ({
   ...props
 }: CardProps) => {
   const styles = cardVariants[variant];
-  const _leftIcon = leftIcon ?? icons[variant];
+  const _leftIcon = icons[variant];
 
   return (
     <View
       className={clsx('flex-row items-center rounded-[4px] p-2 pl-4 g-4', styles.container)}
       {...props}>
-      {_leftIcon && <Icon size={leftIconSize ?? 20} name={_leftIcon} tintColor={styles.left} />}
+      <Icon size={leftIconSize ?? 20} name={_leftIcon} tintColor={styles.left} />
       <View className="flex-1 g-1">
         {!!title && (
           <Text variant="body2-bold" className={styles.title}>

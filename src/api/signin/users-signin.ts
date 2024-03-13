@@ -16,6 +16,3 @@ const signIn = async <T>(variables: Variables): Promise<T> => {
   }
 };
 export const useSignIn = () => useBaseMutation<Variables, UserInfo>({ mutationKey: ['signIn'], mutationFn: signIn, });
-
-
-  
