@@ -11,7 +11,7 @@ const queryClient = new QueryClient();
 
 export const Root = () => {
 
-  const status = "signOut"
+  const status = "si"
 
   return (
     <Stack.Navigator
