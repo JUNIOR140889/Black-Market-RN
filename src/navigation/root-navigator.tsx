@@ -10,6 +10,9 @@ const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
 
 export const Root = () => {
+  
+  const status = "signOut"
+
   return (
     <Stack.Navigator
       screenOptions={{
