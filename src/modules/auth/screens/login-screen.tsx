@@ -1,17 +1,18 @@
-import { useSignIn } from '../../../api/signin';
-import { TouchableOpacity } from 'react-native';
-import { Image, Text, View, ImageBackground, Button, TextInput } from '../../../ui/core';
-import images from '../../../ui/assets/images';
-import type { AuthStackScreenProps } from '../../../navigation/types';
 import { useState } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { LogBox } from 'react-native';
+
+import { useSignIn } from '../../../api/signin';
+import { signIn } from '../../../core';
+import type { AuthStackScreenProps } from '../../../navigation/types';
+import { common } from '../../../translations/en.json';
+import images from '../../../ui/assets/images';
+import { Button, Image, ImageBackground, Text, TextInput, View } from '../../../ui/core';
 import {
   CardNotification,
   hideNotification,
   showNotification,
 } from '../../../ui/core/notifications/card-notification';
-import { signIn } from '../../../core';
-import { common } from '../../../translations/en.json';
-import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(true);
 
@@ -56,7 +57,7 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
           title: common.errors.invalid_email,
         },
       });
-      console.log('email invalido')
+      console.log('email invalido');
       return;
     }
     mutate(request, {
@@ -69,6 +70,7 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
             title: common.success.login_success,
           },
         });
+        navigate('Main');
       },
       onError: () => {
         showNotification({
@@ -85,7 +87,7 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
     <ImageBackground className="flex-1" resizeMode="stretch" source={images.backgroundAuth()}>
       <View className="gap-4 p-8 pt-16">
         <View className="items-center rounded-lg bg-white px-6 pb-4 pt-8">
-          <Image source={images.logoBlackMarket()} className="h-8 w-48"></Image>
+          <Image source={images.logoBlackMarket()} className="h-8 w-48" />
           <View className="mt-8 w-full">
             <Text variant="body1-small" className="mt-4">
               {common.labels.email}
@@ -94,7 +96,8 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
               autoCapitalize="none"
               value={email}
               onChangeText={setEmail}
-              placeholder={common.place_holders.email_input}></TextInput>
+              placeholder={common.place_holders.email_input}
+            />
             <Text variant="body1-small" className="mt-4">
               {common.labels.password}
             </Text>
@@ -103,9 +106,10 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
               value={password}
               onChangeText={setPassword}
               secureTextEntry={true}
-              placeholder={common.place_holders.password_input}></TextInput>
+              placeholder={common.place_holders.password_input}
+            />
           </View>
-          <CardNotification style={{marginTop:10,  height: 50}} />
+          <CardNotification style={{ marginTop: 10, height: 50 }} />
           <Button
             variant="primary"
             size="large"
@@ -126,7 +130,8 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
             size="large"
             className="mt-4"
             label={common.labels.sign_up}
-            onPress={() => navigate('SignUp')}></Button>
+            onPress={() => navigate('SignUp')}
+          />
         </View>
       </View>
     </ImageBackground>

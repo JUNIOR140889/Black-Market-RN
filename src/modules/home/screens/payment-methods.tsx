@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import { common } from '../../../translations/en.json';
 
 const PaymentMethods = () => {
   const handleButtonPress = (buttonIndex: number) => {
@@ -13,23 +15,23 @@ const PaymentMethods = () => {
           source={require('../../../ui/assets/images/home-page/Credit.png')}
           style={styles.image}
         />
-        <Text>Credit</Text>
+        <Text>{common.paymentMethods.credit}</Text>
       </TouchableOpacity>
-      <View style={styles.separator}></View>
+      <View style={styles.separator} />
       <TouchableOpacity onPress={() => handleButtonPress(1)} style={styles.button}>
         <Image
           source={require('../../../ui/assets/images/home-page/Paypal.png')}
           style={styles.image}
         />
-        <Text>Cypto</Text>
+        <Text>{common.paymentMethods.paypal}</Text>
       </TouchableOpacity>
-      <View style={styles.separator}></View>
+      <View style={styles.separator} />
       <TouchableOpacity onPress={() => handleButtonPress(2)} style={styles.button}>
         <Image
           source={require('../../../ui/assets/images/home-page/Crypto.png')}
           style={styles.image}
         />
-        <Text>Cypto</Text>
+        <Text>{common.paymentMethods.crypto}</Text>
       </TouchableOpacity>
     </View>
   );

@@ -21,7 +21,9 @@
       "without_account": "Don't have an account",
       "sign_up": "Sign up",
       "log_in": "Log in",
-      "already_have_account": "Already have an account? "
+      "already_have_account": "Already have an account? ",
+      "dolarSign": "$",
+      "buy": "Buy"
     },
     "errors": {
       "credentials": " Invalid credentials",
@@ -44,7 +46,27 @@
       },
       "first": "By signing up, you accept the ",
       "second": " and the "
-    }
-
+    },
+    "details_screen": {
+      "quantity": "Quantity",
+      "availability": "Availability",
+      "buy": "Buy",
+      "productDescription": "Product description",
+      "items": "items",
+      "byManufacturer": "by"
+    },
+    "homeScreen": {
+      "checkOutPromotion": "Check out our new and restored furniture",
+      "shopTodayDiscount": "Shop today and get a 10% discount!",
+      "paymentMethods": "Payment Methods",
+      "shipmentUpgrade": "We upgraded our shipments many levels up.",
+      "poweredByFedEx": "Powered by ",
+      "fedEx": "FedEx"
+    },
+    "paymentMethods": {
+      "credit": "Credit",
+      "crypto": "Crypto",
+      "paypal": "PayPal"
+    }  
   }
 }
