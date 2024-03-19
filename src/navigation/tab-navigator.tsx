@@ -14,6 +14,7 @@ import { SvgIcon } from '../ui/core/icon';
 import type { MainStackScreenProps } from './types';
 
 import { Text, View } from "../ui/core"
+import { ProductsScreen } from '../modules/products/screens/products-screen';
 
 type TabParamList = {
   Home: undefined;
@@ -54,19 +55,19 @@ const tabs: TabType[] = [
   },
   {
     name: 'Promotion',
-    component: HomeScreen,
+    component: ProductsScreen,
   },
   {
     name: 'Cart',
-    component: HomeScreen,
+    component: ProductsScreen,
   },
   {
     name: 'Favorite',
-    component: HomeScreen,
+    component: ProductsScreen,
   },
   {
     name: 'Menu',
-    component: HomeScreen,
+    component: ProductsScreen,
   },
 ];
 
@@ -113,6 +114,7 @@ export const TabNavigator = () => {
         screenOptions={{
           headerShown: false,
           tabBarStyle: {
+            marginBottom: -25,
             borderTopWidth: 0,
             backgroundColor: '#01031a',
             height: 110,
@@ -139,7 +141,6 @@ const styles = StyleSheet.create({
     height: 200,
   },
   indicator: {
-    backgroundColor: 'tomato',
     height: 4,
     borderRadius: 2,
   },

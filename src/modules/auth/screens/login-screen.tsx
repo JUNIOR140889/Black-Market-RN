@@ -1,6 +1,6 @@
 import { useSignIn } from '../../../api/signin';
-import { TouchableOpacity } from 'react-native'
-import { Image, Text, View, ImageBackground, SafeAreaView, Button, TextInput } from '../../../ui/core'
+import { TouchableOpacity } from 'react-native';
+import { Image, Text, View, ImageBackground, Button, TextInput } from '../../../ui/core';
 import images from '../../../ui/assets/images';
 import type { AuthStackScreenProps } from '../../../navigation/types';
 import { useState } from 'react';
@@ -10,10 +10,7 @@ import {
   showNotification,
 } from '../../../ui/core/notifications/card-notification';
 import { signIn } from '../../../core';
-import { common } from '../../../translations/en.json'
-import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs(true)
+import { common } from '../../../translations/en.json';
 
 type ScreenProps = AuthStackScreenProps<'Login'>;
 
@@ -44,24 +41,24 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
         type: 'error',
         data: {
           title: common.errors.empty_input,
-        }
-      })
-      console.log('email invalido')
-      return  
+        },
+      });
+      console.log('email invalido');
+      return;
     }
     if (!validateEmail(email)) {
       showNotification({
         type: 'error',
         data: {
           title: common.errors.invalid_email,
-        }
-      })
-      console.log('email invalido')
-      return
+        },
+      });
+      console.log('email invalido');
+      return;
     }
     mutate(request, {
       onSuccess: response => {
-        console.log('success')
+        console.log('success');
         signIn(response);
         showNotification({
           type: 'info',
@@ -69,8 +66,9 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
             title: common.success.login_success,
           },
         });
+        navigate('Main');
       },
-      onError: error => {
+      onError: () => {
         showNotification({
           type: 'error',
           data: {
@@ -82,33 +80,53 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
   };
 
   return (
-    <ImageBackground className='flex-1' resizeMode='stretch' source={images.backgroundAuth()}>
-      <View className='p-8 pt-16 gap-4'>
-        <View className='rounded-lg bg-white px-6 pt-8 pb-4 items-center' >
-          <Image source={images.logoBlackMarket()} className='h-8 w-48'></Image>
-          <View className='w-full mt-8'>
-            <Text variant='body1-small' className='mt-4'>{common.labels.email}</Text>
-            <TextInput autoCapitalize='none' value={email} onChangeText={setEmail} placeholder={common.place_holders.email_input}></TextInput>
-            <Text variant='body1-small' className='mt-4'>{common.labels.password}</Text>
-            <TextInput autoCapitalize='none' value={password} onChangeText={setPassword} secureTextEntry={true} placeholder={common.place_holders.password_input } ></TextInput>
+    <ImageBackground className="flex-1" resizeMode="stretch" source={images.backgroundAuth()}>
+      <View className="gap-4 p-8 pt-16">
+        <View className="items-center rounded-lg bg-white px-6 pb-4 pt-8">
+          <Image source={images.logoBlackMarket()} className="h-8 w-48"></Image>
+          <View className="mt-8 w-full">
+            <Text variant="body1-small" className="mt-4">
+              {common.labels.email}
+            </Text>
+            <TextInput
+              autoCapitalize="none"
+              value={email}
+              onChangeText={setEmail}
+              placeholder={common.place_holders.email_input}></TextInput>
+            <Text variant="body1-small" className="mt-4">
+              {common.labels.password}
+            </Text>
+            <TextInput
+              autoCapitalize="none"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+              placeholder={common.place_holders.password_input}></TextInput>
           </View>
           <CardNotification style={{marginTop:10,  height: 50}} />
           <Button
-          variant='primary'
-          size='large'
-          className='mt-4'
-          label='Log In'
-          onPress={() => handle()}
-           />
+            variant="primary"
+            size="large"
+            className="mt-4"
+            label="Log In"
+            onPress={() => {
+              handle();
+            }}
+          />
           <TouchableOpacity>
-            <Text className='mt-4 text-primary-800'>{common.labels.forgot_password}</Text>
+            <Text className="mt-4 text-primary-800">{common.labels.forgot_password}</Text>
           </TouchableOpacity>
         </View>
-        <View className='rounded-lg bg-white items-center px-6 py-4'>
-          <Text variant='body1'>{common.labels.without_account}</Text>
-          <Button variant='primary-inverted' size='large' className='mt-4' label={common.labels.sign_up} onPress={() => navigate("SignUp")} ></Button>
+        <View className="items-center rounded-lg bg-white px-6 py-4">
+          <Text variant="body1">{common.labels.without_account}</Text>
+          <Button
+            variant="primary-inverted"
+            size="large"
+            className="mt-4"
+            label={common.labels.sign_up}
+            onPress={() => navigate('SignUp')} />
         </View>
       </View>
     </ImageBackground>
-  )
-}
+  );
+};

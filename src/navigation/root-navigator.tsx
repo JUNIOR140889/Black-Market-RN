@@ -11,8 +11,6 @@ const queryClient = new QueryClient();
 
 export const Root = () => {
 
-  const status = "signOut"
-
   return (
     <Stack.Navigator
       screenOptions={{
@@ -20,11 +18,7 @@ export const Root = () => {
         gestureEnabled: false,
         animation: 'none',
       }}>
-      {status === 'signOut' ? (
-        <Stack.Screen name="Auth" component={AuthNavigator} />
-      ) : (
-        <Stack.Screen name="App" component={MainNavigator} />
-      )}
+      <Stack.Screen name="Auth" component={AuthNavigator} />
     </Stack.Navigator>
   );
 };
