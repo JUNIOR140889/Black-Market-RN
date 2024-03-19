@@ -1,13 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-
 import { View } from '../../../ui/core/view';
-import HearthIcon from './hearth-icon';
+import { Text } from '../../../ui/core/text';
+import { Image } from '../../../ui/core/nativewind/image';
+import TabFavoriteIcon from '../../../ui/assets/svgs/tab-favorite-icon';
+import { styled } from 'nativewind';
+
 
 const { width: screenWidth } = Dimensions.get('window');
+const SnapCarousel = styled(Carousel);
 
 interface Product {
   id: number;
@@ -72,13 +76,16 @@ type IconType = {
 };
 
 const Icon = ({ focused, ...props }: IconType) => {
-  const fillColor = focused ? 'red' : 'black';
-
+  const fillColor = focused ? 'red' : 'none';
   return (
-    <View style={[styles.tabIconContainer, focused && styles.tabIconContainerFocused]}>
-      <View style={styles.tabIconWrapper}>
-        <HearthIcon stroke={'none'} fill={fillColor} {...props} />
-      </View>
+    <View className="p-2">
+      <TabFavoriteIcon
+        color={fillColor}
+        stroke={`${focused ? 'red' : 'black'}`}
+        strokeWidth="2%"
+        fill={fillColor}
+        {...props}
+      />
     </View>
   );
 };
@@ -94,29 +101,22 @@ const CarouselComponent: React.FC = () => {
       onPress={() => {
         navigateToDetails();
       }}>
-      <View className="mx-3 rounded-lg bg-white pb-3 shadow-lg shadow-gray-400">
-        <View
-          style={{
-            alignItems: 'center',
-          }}>
-          <Image source={item.image} style={styles.image} />
+      <View className="mx-3 my-6 rounded-lg bg-white pb-3 shadow-md shadow-gray-400">
+        <View className="items-center">
+          <Image source={item.image} className="m-2 h-32 w-32 rounded-md object-cover" />
         </View>
-        <View
-          style={{
-            height: 1,
-            backgroundColor: '#e9e8e9',
-            shadowOpacity: 0.4,
-            shadowRadius: 3,
-          }}
-        />
-        <View style={styles.priceState}>
-          <Text style={styles.price}>${item.price}</Text>
-          <View style={[styles.textContainer, item.state === 'New' && styles.textContainerNew]}>
-            <Text style={styles.state}>{item.state}</Text>
+        <View className="h-px justify-center bg-gray-400 shadow-lg " />
+        <View className="border-t-1 flex-row items-center justify-between border-t border-black border-opacity-100 px-3 pt-3">
+          <Text variant="h6-bold">${item.price}</Text>
+          <View
+            className={`${item.state === 'New' ? 'bg-tags-new' : 'bg-tags-restored'} flex items-center justify-center rounded-md p-1 px-2`}>
+            <Text className="text-white" variant="h6">
+              {item.state}
+            </Text>
           </View>
         </View>
-        <View style={styles.nameIcon}>
-          <Text style={styles.name}>{item.name}</Text>
+        <View className="flex-row items-center justify-between pl-3 pr-1.5 pt-2">
+          <Text variant="h6-bold">{item.name}</Text>
           <Icon focused={item.liked} />
         </View>
       </View>
@@ -124,7 +124,7 @@ const CarouselComponent: React.FC = () => {
   );
 
   return (
-    <View>
+    <View className="bg-background-screen pt-4">
       <Carousel
         data={products}
         layout={'default'}
@@ -133,95 +133,13 @@ const CarouselComponent: React.FC = () => {
         itemWidth={screenWidth * 0.5}
         inactiveSlideScale={1}
         inactiveSlideOpacity={1}
-        contentContainerCustomStyle={styles.carouselContentContainer}
         loop
       />
-      <View style={{ alignItems: 'center' }}>
-        <Text style={{ color: '#076CE0', fontWeight: 'bold', fontSize: 19 }}>See all</Text>
+      <View className="items-center">
+        <Text className="text-blue-600" variant="h6-bold">See all</Text>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  itemContainer: {
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    marginHorizontal: 8,
-    paddingBottom: 3,
-    shadowRadius: 8,
-    shadowOpacity: 0.3,
-  },
-  priceState: {
-    flexDirection: 'row',
-    paddingHorizontal: 15,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: 8,
-    borderColor: 'black',
-    borderTopWidth: 1,
-  },
-  nameIcon: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 15,
-  },
-  image: {
-    margin: 10,
-    width: 120,
-    height: 120,
-    resizeMode: 'cover',
-    borderRadius: 4,
-  },
-  price: {
-    fontWeight: 'bold',
-    alignContent: 'center',
-    fontSize: 19,
-  },
-  textContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 6,
-    padding: 2,
-    paddingHorizontal: 4,
-    backgroundColor: '#559F21',
-  },
-  textContainerNew: {
-    backgroundColor: '#2751B9',
-  },
-  state: {
-    color: '#FFFFFF',
-    fontSize: 19,
-  },
-  name: {
-    fontWeight: 'bold',
-    fontSize: 19,
-  },
-  tabIconContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-    tintColor: 'black',
-  },
-  tabIconContainerFocused: {
-    borderRadius: 50,
-    backgroundColor: 'transparent',
-  },
-  tabIconWrapper: {
-    padding: 8,
-  },
-  carouselContentContainer: {
-    display: 'flex',
-    backgroundColor: 'transparent',
-    paddingVertical: 30,
-    alignItems: 'center',
-    marginLeft: -screenWidth * 0.87,
-    marginRight: -screenWidth * 0.87,
-  },
-});
 
 export default CarouselComponent;

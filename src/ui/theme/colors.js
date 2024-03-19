@@ -1,4 +1,8 @@
 const colors = {
+  background: {
+    screen: '#F4F7FA',
+    promotion: '#00031A',
+  },
   white: '#FFFFFF',
   black: '#000000',
   neutral: {
@@ -40,6 +44,10 @@ const colors = {
     100: '#E3F5FF',
     500: '#0F62A8',
     900: '#104979',
+  },
+  tags: {
+    restored: '#559F21',
+    new: '#2751B9',
   },
 };
 
