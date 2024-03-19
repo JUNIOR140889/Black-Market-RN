@@ -11,9 +11,6 @@ import {
 } from '../../../ui/core/notifications/card-notification';
 import { signIn } from '../../../core';
 import { common } from '../../../translations/en.json';
-import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs(true);
 
 type ScreenProps = AuthStackScreenProps<'Login'>;
 
@@ -56,7 +53,7 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
           title: common.errors.invalid_email,
         },
       });
-      console.log('email invalido')
+      console.log('email invalido');
       return;
     }
     mutate(request, {
@@ -69,6 +66,7 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
             title: common.success.login_success,
           },
         });
+        navigate('Main');
       },
       onError: () => {
         showNotification({
@@ -102,7 +100,7 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
               autoCapitalize="none"
               value={password}
               onChangeText={setPassword}
-              secureTextEntry={true}
+              secureTextEntry
               placeholder={common.place_holders.password_input}></TextInput>
           </View>
           <CardNotification style={{marginTop:10,  height: 50}} />
@@ -126,7 +124,7 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
             size="large"
             className="mt-4"
             label={common.labels.sign_up}
-            onPress={() => navigate('SignUp')}></Button>
+            onPress={() => navigate('SignUp')} />
         </View>
       </View>
     </ImageBackground>
