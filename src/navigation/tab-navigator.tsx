@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import type { ComponentType } from 'react';
 import * as React from 'react';
 import type { SvgProps } from 'react-native-svg';
-
+import { StyleSheet } from 'react-native';
 import { HomeScreen } from '../modules/home/screens/home-screen';
 import colors from '../ui/theme/colors';
 import { SvgIcon } from '../ui/core/icon';
@@ -20,6 +20,7 @@ type TabParamList = {
   Promotion: undefined;
   Cart: undefined;
   Favorite: undefined;
+  Menu: undefined;
 };
 
 type TabType = {
@@ -40,9 +41,10 @@ const Tab = createBottomTabNavigator<TabParamList>();
 
 const tabsIcons: TabIconsType = {
   Home: props => <SvgIcon name="tabHomeIcon" {...props} />,
-  Promotion: props => <SvgIcon name="tabHomeIcon" {...props} />,
-  Cart: props => <SvgIcon name="tabHomeIcon" {...props} />,
-  Favorite: props => <SvgIcon name="tabHomeIcon" {...props} />,
+  Promotion: props => <SvgIcon name="tabSellIcon" {...props} />,
+  Cart: props => <SvgIcon name="tabCartIcon" {...props} />,
+  Favorite: props => <SvgIcon name="tabFavoriteIcon" {...props} />,
+  Menu: props => <SvgIcon name="tabMenuIcon" {...props} />,
 };
 
 const tabs: TabType[] = [
@@ -62,6 +64,10 @@ const tabs: TabType[] = [
     name: 'Favorite',
     component: HomeScreen,
   },
+  {
+    name: 'Menu',
+    component: HomeScreen,
+  },
 ];
 
 type TabBarIconType = {
@@ -77,15 +83,12 @@ type TabBarLabelType = {
 
 const TabBarIcon = ({ color, name, focused, ...props }: TabBarIconType) => {
   const TabIcon = tabsIcons[name];
+  const fillColor = focused ? '#01031a' : '#ffffff';
 
   return (
-    <View
-      className={clsx(
-        'absolute flex w-full items-center border-t-2',
-        focused ? 'border-primary-600' : 'border-transparent',
-      )}>
-      <View className="px-4 pt-2">
-        <TabIcon color={color} {...props} />
+    <View style={[styles.tabIconContainer, focused && styles.tabIconContainerFocused]}>
+      <View style={styles.tabIconWrapper}>
+        <TabIcon color={focused ? '#01031a' : '#ffffff'} {...props} fill={fillColor} />
       </View>
     </View>
   );
@@ -94,11 +97,7 @@ const TabBarIcon = ({ color, name, focused, ...props }: TabBarIconType) => {
 const TabBarLabel = ({ name, focused }: TabBarLabelType) => {
   const label = '';
 
-  return (
-    <Text className={clsx(focused ? 'text-primary-600' : 'text-neutral-800')}>
-      {label}
-    </Text>
-  );
+  return <Text className={clsx(focused ? 'text-primary-50' : 'text-neutral-800')}>{label}</Text>;
 };
 
 export const TabNavigator = () => {
@@ -109,14 +108,14 @@ export const TabNavigator = () => {
         tabBarIcon: ({ focused, color }) => (
           <TabBarIcon name={route.name} color={color} focused={focused} />
         ),
-        tabBarActiveTintColor: colors.primary[600],
-        tabBarInactiveTintColor: colors.neutral[800],
       })}>
       <Tab.Group
         screenOptions={{
           headerShown: false,
           tabBarStyle: {
             borderTopWidth: 0,
+            backgroundColor: '#01031a',
+            height: 110,
           },
         }}>
         {tabs.map(({ name, component }) => (
@@ -126,3 +125,38 @@ export const TabNavigator = () => {
     </Tab.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: 'white',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    height: 20,
+    paddingBottom: 10,
+  },
+  tab: {
+    paddingTop: 5,
+    height: 200,
+  },
+  indicator: {
+    backgroundColor: 'tomato',
+    height: 4,
+    borderRadius: 2,
+  },
+  tabIconContainer: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    tintColor: 'white',
+  },
+  tabIconContainerFocused: {
+    borderRadius: 50,
+    backgroundColor: 'white',
+  },
+  tabIconWrapper: {
+    padding: 8,
+  },
+});
