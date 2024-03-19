@@ -20,17 +20,17 @@ const item = {
   description2:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit etiam eu turpis molestie, dictum est a, mattis tellus.',
 };
+const availableItems = 12;
+
+const images = [
+  require('../../../../ui/assets/images/product-details/image-5.png'),
+  require('../../../../ui/assets/images/product-details/image-6.png'),
+  require('../../../../ui/assets/images/product-details/image-5.png'),
+];
 
 export const DetailsScreen = () => {
-  const availableItems = 12;
-  const [selectedImage, setSelectedImage] = useState<number>(0);
+  const [selectedImage, setSelectedImage] = useState(0);
   const navigation = useNavigation();
-
-  const images = [
-    require('../../../../ui/assets/images/product-details/image-5.png'),
-    require('../../../../ui/assets/images/product-details/image-6.png'),
-    require('../../../../ui/assets/images/product-details/image-5.png'),
-  ];
 
   const changePrincipalImage = (index: number) => {
     setSelectedImage(index);
@@ -71,7 +71,7 @@ export const DetailsScreen = () => {
           <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mb-4">
             {images.map((image, index) => (
               <TouchableOpacity key={index} onPress={() => changePrincipalImage(index)}>
-                <Image source={image} style={{ width: 100, height: 100, marginRight: 10 }} />
+                <Image source={image} className="w-28 h-28 mr-4 rounded-md" />
               </TouchableOpacity>
             ))}
           </ScrollView>

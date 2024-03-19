@@ -103,9 +103,10 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
               value={password}
               onChangeText={setPassword}
               secureTextEntry
-              placeholder={common.place_holders.password_input} />
+              placeholder={common.place_holders.password_input}
+            />
           </View>
-          <CardNotification style={{ marginTop: 10, height: 50 }} />
+          <CardNotification className="-mb-1 mt-2" />
           <Button
             variant="primary"
             size="large"
