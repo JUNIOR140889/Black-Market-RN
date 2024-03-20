@@ -1,9 +1,11 @@
+import { styled } from 'nativewind';
 import React from 'react';
 import { Image as RNImage } from 'react-native';
+
+import { common } from '../../../translations/en.json';
+import { Text } from '../../../ui/core/text';
 import { View } from '../../../ui/core/view';
 import { TouchableOpacity } from '../../../ui/core/view';
-import { Text } from '../../../ui/core/text';
-import { styled } from 'nativewind';
 
 const Image = styled(RNImage);
 
@@ -21,7 +23,7 @@ const PaymentMethods = () => {
           source={require('../../../ui/assets/images/home-page/Credit.png')}
           className="mb-4"
         />
-        <Text>Credit</Text>
+        <Text>{common.paymentMethods.credit}</Text>
       </TouchableOpacity>
       <View className="mx-5 h-full w-px bg-black" />
       <TouchableOpacity
@@ -31,7 +33,7 @@ const PaymentMethods = () => {
           source={require('../../../ui/assets/images/home-page/Paypal.png')}
           className="mb-4"
         />
-        <Text>Cypto</Text>
+        <Text>{common.paymentMethods.paypal}</Text>
       </TouchableOpacity>
       <View className="mx-5 h-full w-px bg-black" />
       <TouchableOpacity
@@ -41,7 +43,7 @@ const PaymentMethods = () => {
           source={require('../../../ui/assets/images/home-page/Crypto.png')}
           className="mb-4"
         />
-        <Text>Cypto</Text>
+        <Text>{common.paymentMethods.crypto}</Text>
       </TouchableOpacity>
     </View>
   );

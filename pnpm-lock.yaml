@@ -119,6 +119,9 @@ dependencies:
   react-native-confirmation-code-field:
     specifier: ^7.3.2
     version: 7.3.2(react-native@0.72.6)(react@18.2.0)
+  react-native-element-dropdown:
+    specifier: ^2.10.2
+    version: 2.10.2(react-native@0.72.6)(react@18.2.0)
   react-native-flash-message:
     specifier: ^0.4.0
     version: 0.4.2(prop-types@15.8.1)(react-native@0.72.6)(react@18.2.0)
@@ -12155,6 +12158,18 @@ packages:
       react-native:
         optional: true
     dependencies:
+      react: 18.2.0
+      react-native: 0.72.6(@babel/core@7.23.9)(@babel/preset-env@7.23.9)(react@18.2.0)
+    dev: false
+
+  /react-native-element-dropdown@2.10.2(react-native@0.72.6)(react@18.2.0):
+    resolution: {integrity: sha512-z6UemDzQdr+a1NDhImCApzRaW9uNiPOPRhjbMFVds855rqSjXPc3vGNaevxWi5q7PdqjyIxWTL6Z1rifcHl53g==}
+    engines: {node: '>= 16.0.0'}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      lodash: 4.17.21
       react: 18.2.0
       react-native: 0.72.6(@babel/core@7.23.9)(@babel/preset-env@7.23.9)(react@18.2.0)
     dev: false

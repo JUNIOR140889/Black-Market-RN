@@ -1,12 +1,13 @@
+import { styled } from 'nativewind';
 import { Image as RNImage } from 'react-native';
+
+import images from '../../../ui/assets/images/index';
+import { Text } from '../../../ui/core/text';
 import { SafeAreaView } from '../../../ui/core/view';
-import CarouselComponent from './carousel-component';
-import PaymentMethods from './payment-methods';
 import { View } from '../../../ui/core/view';
 import { ScrollView } from '../../../ui/core/view';
-import { Text } from '../../../ui/core/text';
-import { styled } from 'nativewind';
-import images from '../../../ui/assets/images/index';
+import CarouselComponent from './carousel-component';
+import PaymentMethods from './payment-methods';
 
 const Image = styled(RNImage);
 
@@ -25,7 +26,9 @@ export const HomeScreen = () => {
             <Text variant='body1' className="text-white font-bold w-3/4">
               Check out our new and restored furniture
             </Text>
-            <Text variant='body1' className="text-white w-3/4">Shop today and get a 10% discount!</Text>
+            <Text variant="body1" className="w-3/4 text-white">
+              Shop today and get a 10% discount!
+            </Text>
           </View>
         </View>
         <View className="bg-white flex items-center justify-center content-center py-9">

@@ -5,16 +5,14 @@ import type { CompositeScreenProps } from '@react-navigation/native';
 import clsx from 'clsx';
 import type { ComponentType } from 'react';
 import * as React from 'react';
-import type { SvgProps } from 'react-native-svg';
 import { StyleSheet } from 'react-native';
+import type { SvgProps } from 'react-native-svg';
+
 import { HomeScreen } from '../modules/home/screens/home-screen';
-import colors from '../ui/theme/colors';
-import { SvgIcon } from '../ui/core/icon';
-
-import type { MainStackScreenProps } from './types';
-
-import { Text, View } from "../ui/core"
 import { ProductsScreen } from '../modules/products/screens/products-screen';
+import { Text, View } from '../ui/core';
+import { SvgIcon } from '../ui/core/icon';
+import type { MainStackScreenProps } from './types';
 
 type TabParamList = {
   Home: undefined;
@@ -95,10 +93,10 @@ const TabBarIcon = ({ color, name, focused, ...props }: TabBarIconType) => {
   );
 };
 
-const TabBarLabel = ({ name, focused }: TabBarLabelType) => {
+const TabBarLabel = ({ focused }: TabBarLabelType) => {
   const label = '';
 
-  return <Text className={clsx(focused ? 'text-primary-50' : 'text-neutral-800')}>{label}</Text>;
+  return <Text className={clsx(focused ? 'transparent' : 'text-neutral-800')}>{label}</Text>;
 };
 
 export const TabNavigator = () => {
@@ -131,9 +129,6 @@ export const TabNavigator = () => {
 const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: 'white',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    height: 20,
     paddingBottom: 10,
   },
   tab: {
@@ -151,7 +146,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
-    tintColor: 'white',
   },
   tabIconContainerFocused: {
     borderRadius: 50,
