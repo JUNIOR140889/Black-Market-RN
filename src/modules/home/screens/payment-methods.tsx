@@ -1,7 +1,13 @@
+import { styled } from 'nativewind';
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image as RNImage } from 'react-native';
 
 import { common } from '../../../translations/en.json';
+import { Text } from '../../../ui/core/text';
+import { View } from '../../../ui/core/view';
+import { TouchableOpacity } from '../../../ui/core/view';
+
+const Image = styled(RNImage);
 
 const PaymentMethods = () => {
   const handleButtonPress = (buttonIndex: number) => {
@@ -9,60 +15,38 @@ const PaymentMethods = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => handleButtonPress(0)} style={styles.button}>
+    <View className="my-4 h-20 w-4/5 flex-row items-center justify-evenly">
+      <TouchableOpacity
+        className="mx-3 items-center justify-items-center"
+        onPress={() => handleButtonPress(0)}>
         <Image
           source={require('../../../ui/assets/images/home-page/Credit.png')}
-          style={styles.image}
+          className="mb-4"
         />
         <Text>{common.paymentMethods.credit}</Text>
       </TouchableOpacity>
-      <View style={styles.separator} />
-      <TouchableOpacity onPress={() => handleButtonPress(1)} style={styles.button}>
+      <View className="mx-5 h-full w-px bg-black" />
+      <TouchableOpacity
+        className="mx-3 items-center justify-items-center"
+        onPress={() => handleButtonPress(1)}>
         <Image
           source={require('../../../ui/assets/images/home-page/Paypal.png')}
-          style={styles.image}
+          className="mb-4"
         />
         <Text>{common.paymentMethods.paypal}</Text>
       </TouchableOpacity>
-      <View style={styles.separator} />
-      <TouchableOpacity onPress={() => handleButtonPress(2)} style={styles.button}>
+      <View className="mx-5 h-full w-px bg-black" />
+      <TouchableOpacity
+        className="mx-3 items-center justify-items-center"
+        onPress={() => handleButtonPress(2)}>
         <Image
           source={require('../../../ui/assets/images/home-page/Crypto.png')}
-          style={styles.image}
+          className="mb-4"
         />
         <Text>{common.paymentMethods.crypto}</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: '80%',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginVertical: 20,
-  },
-  button: {
-    marginHorizontal: 10,
-    alignItems: 'center',
-  },
-  image: {
-    width: 30,
-    height: 30,
-    resizeMode: 'contain',
-    marginBottom: 20,
-  },
-  text: {
-    fontSize: 19,
-  },
-  separator: {
-    height: '100%',
-    width: 1,
-    backgroundColor: 'gray',
-    marginHorizontal: 5,
-  },
-});
 
 export default PaymentMethods;

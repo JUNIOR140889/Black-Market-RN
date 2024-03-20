@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { LogBox } from 'react-native';
 
 import { useSignIn } from '../../../api/signin';
 import { signIn } from '../../../core';
@@ -13,8 +12,6 @@ import {
   hideNotification,
   showNotification,
 } from '../../../ui/core/notifications/card-notification';
-LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs(true);
 
 type ScreenProps = AuthStackScreenProps<'Login'>;
 
@@ -105,11 +102,11 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
               autoCapitalize="none"
               value={password}
               onChangeText={setPassword}
-              secureTextEntry={true}
+              secureTextEntry
               placeholder={common.place_holders.password_input}
             />
           </View>
-          <CardNotification style={{ marginTop: 10, height: 50 }} />
+          <CardNotification className="-mb-1 mt-2" />
           <Button
             variant="primary"
             size="large"
