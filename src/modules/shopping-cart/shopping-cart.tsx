@@ -2,6 +2,7 @@ import { styled } from 'nativewind';
 import React from 'react';
 import { Image as RNImage } from 'react-native';
 
+import { common } from '../../translations/en.json';
 import images from '../../ui/assets/images/index';
 import { Text } from '../../ui/core/text';
 import { SafeAreaView, ScrollView, TouchableOpacity, View } from '../../ui/core/view';
@@ -9,15 +10,18 @@ import { SafeAreaView, ScrollView, TouchableOpacity, View } from '../../ui/core/
 const Image = styled(RNImage);
 
 interface CartItemProps {
+  id: number;
   name: string;
   price: number;
   quantity: number;
+  state: string;
   onRemove: () => void;
   onIncrement: () => void;
   onDecrement: () => void;
 }
 
 const CartItem: React.FC<CartItemProps> = ({
+  id,
   name,
   price,
   state,
@@ -26,32 +30,45 @@ const CartItem: React.FC<CartItemProps> = ({
   onIncrement,
   onDecrement,
 }) => (
-  <View className="m-4 flex-row items-center justify-between">
-    <View className="rounded-md">
-      <Image
-        className="h-28 w-28"
-        source={require('../../ui/assets/images/product-details/image-5.png')}
-      />
-    </View>
-    <View className="w-8/12 justify-between h-28 bg-purple-400">
-      <View className="mx-4 flex-row justify-between">
-        <Text className="font-bold">{name}</Text>
-        <Text className="font-bold">${price}</Text>
+  <View className="m-4 h-32 flex-row items-center justify-between">
+    <Image
+      className="h-24 w-24 rounded-md"
+      source={require('../../ui/assets/images/shopping-cart/image-2.png')}
+    />
+    <View className="h-28 w-9/12 justify-between pl-2">
+      <View className="mx-2 mt-1 flex-row justify-between">
+        <Text variant="body1" className="font-bold">
+          {name}
+        </Text>
+        <Text variant="body1" className="font-bold">
+          ${price}
+        </Text>
       </View>
-      <View>
-        <Text className={`${}`}>Restored</Text>
+      <View
+        className={`${state === 'New' ? 'bg-tags-new' : 'bg-tags-restored'} mb-4 ml-2 w-20 items-center rounded-md`}>
+        <Text variant="body2" className="text-white">
+          {state}
+        </Text>
       </View>
-      <View className="flex-row">
-        <TouchableOpacity className="ml-4" onPress={onRemove}>
-          <Text className="text-blue-500">Remove</Text>
+      <View className="flex-row items-center justify-between px-2">
+        <TouchableOpacity className="" onPress={onRemove}>
+          <Text variant="body2-bold" className="text-link-100">
+            {common.buttons.remove}
+          </Text>
         </TouchableOpacity>
         <View className="flex-row items-center">
-          <TouchableOpacity className="bg-red-500 rounded-full p-1" onPress={onDecrement}>
-            <Text className="text-white font-bold">-</Text>
+          <TouchableOpacity className=" rounded-full p-0.5" onPress={onDecrement}>
+            <Text variant="h6" className="pb-1 font-bold text-black">
+              {common.labels.minusSign}
+            </Text>
           </TouchableOpacity>
-          <Text className="mx-2">{quantity}</Text>
-          <TouchableOpacity className="bg-green-500 rounded-full p-1" onPress={onIncrement}>
-            <Text className="text-white font-bold">+</Text>
+          <Text variant="body1" className="mx-2">
+            {quantity}
+          </Text>
+          <TouchableOpacity className="rounded-full p-1" onPress={onIncrement}>
+            <Text variant="h6" className="pb-1 font-bold text-black">
+              {common.labels.plusSign}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -61,9 +78,9 @@ const CartItem: React.FC<CartItemProps> = ({
 
 export const ShoppingCartScreen: React.FC = () => {
   const cartItems = [
-    { name: 'Baumler chair', state: "New", price: 36, quantity: 12 },
-    { name: 'Baumler chair', state: "New", price: 36, quantity: 1 },
-    { name: 'Baumler chair', state: "New", price: 36, quantity: 1 },
+    { name: 'Baumler chair', state: 'New', price: 36, quantity: 12 },
+    { name: 'Baumler chair', state: 'Restored', price: 36, quantity: 1 },
+    { name: 'Baumler chair', state: 'New', price: 36, quantity: 1 },
   ];
 
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -73,35 +90,48 @@ export const ShoppingCartScreen: React.FC = () => {
       <ScrollView className="w-full">
         <Image className="w-full" source={images.blackMarketHeader()} />
 
-        <View className="flex-row justify-between mb-4 p-4 items-center">
-          <Text variant="body1" className="text-lg">My shopping cart</Text>
+        <View className="flex-row items-center justify-between p-4">
+          <Text variant="body1" className="text-lg">
+            {common.labels.shoppingCart}
+          </Text>
           <TouchableOpacity>
-            <Text variant="body1" className="text-link-100 font-bold text-sm">Clear all</Text>
+            <Text variant="body1" className="text-sm font-bold text-link-100">
+              {common.buttons.clearAll}
+            </Text>
           </TouchableOpacity>
         </View>
-        <View className="border-black border mx-4 rounded-md">
+        <View className="mx-4 rounded-lg border border-black bg-white">
           {cartItems.map((item, index) => (
             <>
               <CartItem
                 key={index}
                 name={item.name}
                 price={item.price}
+                state={item.state}
                 quantity={item.quantity}
                 onRemove={() => console.log(`Removing ${item.name}`)}
                 onIncrement={() => console.log(`Incrementing ${item.name}`)}
                 onDecrement={() => console.log(`Decrementing ${item.name}`)}
               />
-              <View className="h-px w-full bg-black" />
+              {index < cartItems.length - 1 && <View className="h-px w-full bg-black" />}
             </>
           ))}
         </View>
-        <View className="flex-row justify-between mt-4">
-          <Text className="text-xl font-bold">TOTAL</Text>
-          <Text className="text-xl font-bold">${totalPrice}</Text>
+        <View className="mt-4 flex-row items-center justify-between pr-4">
+          <View className="w-3/5 flex-row items-center justify-evenly">
+            <Text variant="body1-bold">{common.labels.total}</Text>
+            <View className="h-px w-2/12 bg-black" />
+            <Text variant="body1-bold">
+              {common.labels.dolarSign}
+              {totalPrice}
+            </Text>
+          </View>
+          <TouchableOpacity className="rounded-lg bg-background-promotion p-3.5">
+            <Text variant="body2-bold" className="text-center text-white">
+              {common.buttons.checkout}
+            </Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity className="bg-blue-500 p-4 rounded-lg mt-4">
-          <Text className="text-white font-bold text-center">Go to checkout</Text>
-        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
