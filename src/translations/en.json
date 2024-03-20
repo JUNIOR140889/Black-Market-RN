@@ -14,7 +14,8 @@
       "skip": "Skip",
       "checkout": "Go to checkout",
       "remove": "Remove",
-      "clearAll": "Clear all"
+      "clearAll": "Clear all",
+      "buy": "Buy"
     },
     "labels": {
       "email": "Email",

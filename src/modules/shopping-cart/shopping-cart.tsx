@@ -4,6 +4,7 @@ import { Image as RNImage } from 'react-native';
 
 import { common } from '../../translations/en.json';
 import images from '../../ui/assets/images/index';
+import { Button } from '../../ui/core/nativewind/button';
 import { Text } from '../../ui/core/text';
 import { SafeAreaView, ScrollView, TouchableOpacity, View } from '../../ui/core/view';
 
@@ -84,6 +85,9 @@ export const ShoppingCartScreen: React.FC = () => {
   ];
 
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const buy = () => {
+    console.log('buyed');
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-background-screen">
@@ -117,7 +121,7 @@ export const ShoppingCartScreen: React.FC = () => {
             </>
           ))}
         </View>
-        <View className="mt-4 flex-row items-center justify-between pr-4">
+        <View className="mt-4 flex-row items-center justify-between pr-16">
           <View className="w-3/5 flex-row items-center justify-evenly">
             <Text variant="body1-bold">{common.labels.total}</Text>
             <View className="h-px w-2/12 bg-black" />
@@ -126,11 +130,9 @@ export const ShoppingCartScreen: React.FC = () => {
               {totalPrice}
             </Text>
           </View>
-          <TouchableOpacity className="rounded-lg bg-background-promotion p-3.5">
-            <Text variant="body2-bold" className="text-center text-white">
-              {common.buttons.checkout}
-            </Text>
-          </TouchableOpacity>
+          <View className="pr-9">
+            <Button onPress={buy} textClassName="font-bold text-base" label={common.buttons.buy} />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
