@@ -15,4 +15,5 @@ const signIn = async <T>(variables: Variables): Promise<T> => {
     throw parseAxiosError(error);
   }
 };
-export const useSignIn = () => useBaseMutation<Variables, UserInfo>({ mutationKey: ['signIn'], mutationFn: signIn, });
+export const useSignIn = () =>
+  useBaseMutation<Variables, UserInfo>({ mutationKey: ['signIn'], mutationFn: signIn });
