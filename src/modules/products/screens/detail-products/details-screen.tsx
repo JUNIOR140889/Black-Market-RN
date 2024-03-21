@@ -7,6 +7,7 @@ import { common } from '../../../../translations/en.json';
 import DropdownComponent from '../../../../ui/core/select-menu';
 import { Text } from '../../../../ui/core/text';
 import { SafeAreaView, ScrollView, View } from '../../../../ui/core/view';
+import { Button } from '../../../../ui/core/nativewind/button';
 const Image = styled(RNImage);
 const TouchableOpacity = styled(RNTouchableOpacity);
 
@@ -28,6 +29,10 @@ const images = [
   require('../../../../ui/assets/images/product-details/image-5.png'),
 ];
 
+const pressed = () => {
+  console.log('pressed')
+};
+
 export const DetailsScreen = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const navigation = useNavigation();
@@ -45,7 +50,7 @@ export const DetailsScreen = () => {
       <ScrollView>
         <View>
           <Image
-            style={{ width: '100%' }}
+            className="w-full"
             source={require('../../../../ui/assets/images/logo-black-market/Header.png')}
           />
         </View>
@@ -83,12 +88,16 @@ export const DetailsScreen = () => {
               <DropdownComponent quantity={availableItems} />
             </View>
             <View className="w-2/3 items-center">
-              <Text variant="body1" className="mb-2 mr-2 font-bold">
+              <Text variant="body1" className=" mr-2 font-bold">
                 {common.details_screen.availability} {availableItems} {common.details_screen.items}
               </Text>
-              <TouchableOpacity className="w-full items-center rounded-md bg-slate-900 p-3">
-                <Text className="text-lg font-bold text-white">{common.labels.buy}</Text>
-              </TouchableOpacity>
+              <Button
+                className="h-12 mt-3"
+                label={common.labels.buy}
+                variant="primary"
+                textClassName="font-bold text-base"
+                onPress={pressed}
+              />
             </View>
           </View>
           <View className="mb-4">
