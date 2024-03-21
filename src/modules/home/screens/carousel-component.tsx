@@ -86,7 +86,9 @@ const CarouselComponent: React.FC = () => {
         loop
       />
       <View className="items-center">
-        <Text className="text-blue-600" variant="h6-bold">See all</Text>
+        <Text className="text-blue-600" variant="h6-bold">
+          See all
+        </Text>
       </View>
     </View>
   );
