@@ -11,7 +11,11 @@
       "next": "Next",
       "ok": "OK",
       "save": "Save",
-      "skip": "Skip"
+      "skip": "Skip",
+      "checkout": "Go to checkout",
+      "remove": "Remove",
+      "clearAll": "Clear all",
+      "buy": "Buy"
     },
     "labels": {
       "email": "Email",
@@ -23,7 +27,11 @@
       "log_in": "Log in",
       "already_have_account": "Already have an account? ",
       "dolarSign": "$",
-      "buy": "Buy"
+      "buy": "Buy",
+      "shoppingCart": "My shopping cart",
+      "total": "TOTAL",
+      "plusSign": "+",
+      "minusSign": "-"
     },
     "errors": {
       "credentials": " Invalid credentials",

@@ -10,6 +10,7 @@ import type { SvgProps } from 'react-native-svg';
 
 import { HomeScreen } from '../modules/home/screens/home-screen';
 import { ProductsScreen } from '../modules/products/screens/products-screen';
+import { ShoppingCartScreen } from '../modules/shopping-cart/shopping-cart';
 import { Text, View } from '../ui/core';
 import { SvgIcon } from '../ui/core/icon';
 import type { MainStackScreenProps } from './types';
@@ -57,7 +58,7 @@ const tabs: TabType[] = [
   },
   {
     name: 'Cart',
-    component: ProductsScreen,
+    component: ShoppingCartScreen,
   },
   {
     name: 'Favorite',

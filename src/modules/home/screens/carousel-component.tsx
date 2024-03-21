@@ -1,17 +1,14 @@
 import { useNavigation } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import { StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { Dimensions, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { View } from '../../../ui/core/view';
 import { Text } from '../../../ui/core/text';
 import { Image } from '../../../ui/core/nativewind/image';
 import TabFavoriteIcon from '../../../ui/assets/svgs/tab-favorite-icon';
-import { styled } from 'nativewind';
-
 
 const { width: screenWidth } = Dimensions.get('window');
-const SnapCarousel = styled(Carousel);
 
 interface Product {
   id: number;
