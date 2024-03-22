@@ -1,41 +1,50 @@
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { styled } from 'nativewind';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Image as RNImage, TouchableOpacity as RNTouchableOpacity } from 'react-native';
 
+import { useAddShoppingCartItems } from '../../../../api/details/use-buy';
+import { useGetItemDetails } from '../../../../api/details/use-details';
 import { common } from '../../../../translations/en.json';
+import { Button } from '../../../../ui/core/nativewind/button';
 import DropdownComponent from '../../../../ui/core/select-menu';
 import { Text } from '../../../../ui/core/text';
 import { SafeAreaView, ScrollView, View } from '../../../../ui/core/view';
-import { Button } from '../../../../ui/core/nativewind/button';
+
 const Image = styled(RNImage);
 const TouchableOpacity = styled(RNTouchableOpacity);
+interface Props {
+  route: {
+    params: {
+      id: number;
+    };
+  };
+}
 
-const item = {
-  state: 'Restored',
-  name: 'Baumler Chair',
-  manufactur: 'Woodstock Co.',
-  price: 30,
-  description1:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus.\n',
-  description2:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit etiam eu turpis molestie, dictum est a, mattis tellus.',
-};
-const availableItems = 12;
+export const DetailsScreen: React.FC<Props> = ({ route }) => {
+  const { id } = route.params;
+  const { data, refetch } = useGetItemDetails(id);
+  const mutate = useAddShoppingCartItems({});
 
-const images = [
-  require('../../../../ui/assets/images/product-details/image-5.png'),
-  require('../../../../ui/assets/images/product-details/image-6.png'),
-  require('../../../../ui/assets/images/product-details/image-5.png'),
-];
-
-const pressed = () => {
-  console.log('pressed')
-};
-
-export const DetailsScreen = () => {
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
+  );
+  const [selectedValue, setSelectedValue] = useState('1');
   const [selectedImage, setSelectedImage] = useState(0);
   const navigation = useNavigation();
+
+  const handleDropdownChange = (value: string) => {
+    setSelectedValue(value);
+  };
+
+  const buy = async (itemId: number, quantity: number) => {
+    try {
+      await mutate.mutateAsync({ itemId, quantity });
+    } catch (error) {}
+    navigation.navigate('Tab');
+  };
 
   const changePrincipalImage = (index: number) => {
     setSelectedImage(index);
@@ -56,27 +65,44 @@ export const DetailsScreen = () => {
         </View>
         <View className="px-4 py-3">
           <View className="flex-row justify-between">
-            <View className="w-1/4 items-center justify-center rounded-md bg-[#559F21]">
-              <Text variant="body1" className="text-white">
-                {item.state}
+            <View
+              className={`${data?.state === 'totaly_new' ? 'bg-tags-new' : 'bg-tags-restored'} w-1/4 items-center justify-center rounded-md`}>
+              <Text variant="body1-bold" className="text-white">
+                {data?.state === 'totaly_new' ? 'New' : 'Restored'}
               </Text>
             </View>
             <TouchableOpacity className="mr-4" onPress={handleBackToHome}>
               <Text className="text-2xl font-bold text-red-700">X</Text>
             </TouchableOpacity>
           </View>
-          <Text variant="h3">{item.name}</Text>
-          <Text variant="h3" className="font-light">
-            {common.details_screen.byManufacturer} {item.manufactur}
+          <Text variant="h3" className="font-semi-bold">
+            {data?.title}
           </Text>
-          <Text variant="h3" className="font-medium">
-            {common.labels.dolarSign} {item.price}
+          <Text variant="h4" className="font-light">
+            {data?.category.name}
           </Text>
-          <Image source={images[selectedImage]} className="my-4 h-[300px] w-full rounded-lg" />
+          <Text variant="h3" className="font-semi-bold">
+            {data?.unitPrice}
+          </Text>
+          <View className="h-68 my-3 w-full rounded-lg bg-white">
+            <Image
+              source={{ uri: data?.pictures[selectedImage] }}
+              className="my-3 h-72 w-full rounded-lg"
+              resizeMode="contain"
+              resizeMethod="auto"
+            />
+          </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mb-4">
-            {images.map((image, index) => (
-              <TouchableOpacity key={index} onPress={() => changePrincipalImage(index)}>
-                <Image source={image} className="w-28 h-28 mr-4 rounded-md" />
+            {data?.pictures.map((image, index) => (
+              <TouchableOpacity
+                className="mr-4 h-28 w-28 rounded-md bg-white"
+                key={index}
+                onPress={() => changePrincipalImage(index)}>
+                <Image
+                  source={{ uri: image }}
+                  resizeMode="contain"
+                  className="mr-4 h-28 w-28 rounded-md"
+                />
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -85,27 +111,32 @@ export const DetailsScreen = () => {
               <Text variant="body1" className="mb-3 mr-2 font-bold">
                 {common.details_screen.quantity}
               </Text>
-              <DropdownComponent quantity={availableItems} />
+              {data?.stock && (
+                <DropdownComponent quantity={data.stock} onChange={handleDropdownChange} />
+              )}
             </View>
             <View className="w-2/3 items-center">
               <Text variant="body1" className=" mr-2 font-bold">
-                {common.details_screen.availability} {availableItems} {common.details_screen.items}
+                {common.details_screen.availability} {data?.stock} {common.details_screen.items}
               </Text>
-              <Button
-                className="h-12 mt-3"
-                label={common.labels.buy}
-                variant="primary"
-                textClassName="font-bold text-base"
-                onPress={pressed}
-              />
+              {data?.id && (
+                <Button
+                  className="mt-3 h-12"
+                  label={common.labels.buy}
+                  variant="primary"
+                  textClassName="font-bold text-base"
+                  onPress={() => {
+                    buy(data.id, parseInt(selectedValue, 10));
+                  }}
+                />
+              )}
             </View>
           </View>
           <View className="mb-4">
             <Text variant="body1" className="mb-3 mr-2 font-bold">
               {common.details_screen.productDescription}
             </Text>
-            <Text variant="body1">{item.description1}</Text>
-            <Text variant="body1">{item.description2}</Text>
+            <Text variant="body1">{data?.description}</Text>
           </View>
         </View>
       </ScrollView>

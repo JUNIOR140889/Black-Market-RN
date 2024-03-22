@@ -1,4 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
 import React, { useCallback } from 'react';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
@@ -11,6 +13,12 @@ import { Text } from '../../../ui/core/text';
 import { View } from '../../../ui/core/view';
 
 const { width: screenWidth } = Dimensions.get('window');
+
+type RootStackParamList = {
+  Details: { id: number };
+};
+
+type CarouselNavigationProp = StackNavigationProp<RootStackParamList>;
 
 type IconType = {
   focused: boolean;
@@ -33,7 +41,7 @@ const Icon = ({ focused, ...props }: IconType) => {
 
 const CarouselComponent: React.FC = () => {
   const { data, refetch } = useGetItems();
-
+  const navigation = useNavigation<CarouselNavigationProp>();
   useFocusEffect(
     useCallback(() => {
       refetch();
@@ -41,8 +49,11 @@ const CarouselComponent: React.FC = () => {
   );
 
   const renderItem = ({ item }: { item: Product }) => {
+    const navigateToDetails = () => {
+      navigation.navigate('Details', { id: item.id });
+    };
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={navigateToDetails}>
         <View className="mx-3 my-6 h-64 rounded-lg bg-white pb-3 shadow-md shadow-gray-500">
           <View className="items-center">
             <Image source={item.pictures[0]} className="m-2 h-32 w-32 rounded-md object-cover" />
