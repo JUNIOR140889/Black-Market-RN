@@ -44,7 +44,6 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
           title: common.errors.empty_input,
         },
       });
-      console.log('email invalido');
       return;
     }
     if (!validateEmail(email)) {
@@ -54,12 +53,10 @@ export const LoginScreen = ({ navigation: { navigate } }: ScreenProps) => {
           title: common.errors.invalid_email,
         },
       });
-      console.log('email invalido');
       return;
     }
     mutate(request, {
       onSuccess: response => {
-        console.log('success');
         signIn(response);
         showNotification({
           type: 'info',
