@@ -5,6 +5,7 @@ import { Image as RNImage } from 'react-native';
 import { useDeleteShoppingCartItem } from '../../api/shopping-cart/use-delete';
 import { useUpdateShoppingCartItem } from '../../api/shopping-cart/use-update';
 import { common } from '../../translations/en.json';
+import { Button } from '../../ui/core';
 import { Text } from '../../ui/core/text';
 import { TouchableOpacity, View } from '../../ui/core/view';
 
@@ -71,27 +72,27 @@ export const CartItem: React.FC<CartItemProps> = ({
             </Text>
           </TouchableOpacity>
           <View className="flex-row items-center">
-            <TouchableOpacity
-              className=" rounded-full p-0.5"
+            <Button
               onPress={() => {
                 handleUpdate(quantity - 1);
-              }}>
-              <Text variant="h5" className="pb-1 font-bold text-black">
-                {common.labels.minusSign}
-              </Text>
-            </TouchableOpacity>
+              }}
+              label={common.labels.minusSign}
+              size="signs"
+              className="h-9 w-9 items-center border-0 bg-white p-0"
+              textClassName="text-black font-black"
+            />
             <Text variant="body1" className="mx-2">
               {quantity}
             </Text>
-            <TouchableOpacity
-              className="rounded-full p-1"
+            <Button
               onPress={() => {
                 handleUpdate(quantity + 1);
-              }}>
-              <Text variant="h5" className="pb-1 font-bold text-black">
-                {common.labels.plusSign}
-              </Text>
-            </TouchableOpacity>
+              }}
+              label={common.labels.plusSign}
+              size="signs"
+              className="h-9 w-9 items-center border-0 bg-white p-0"
+              textClassName="text-black font-black"
+            />
           </View>
         </View>
       </View>
