@@ -8,8 +8,6 @@ import { View } from '../../../ui/core/view';
 import { ScrollView } from '../../../ui/core/view';
 import CarouselComponent from './carousel-component';
 import PaymentMethods from './payment-methods';
-import { client } from '../../../api/common';
-import { parseAxiosError } from '../../../api/common/utils';
 
 const Image = styled(RNImage);
 

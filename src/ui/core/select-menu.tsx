@@ -9,10 +9,11 @@ const Dropdown = styled(RNDropdown);
 
 interface DropdownComponentProps {
   quantity: number;
+  onChange: (value: string) => void;
 }
 
-const DropdownComponent: React.FC<DropdownComponentProps> = ({ quantity }) => {
-  const [value, setValue] = useState<string | null>(null);
+const DropdownComponent: React.FC<DropdownComponentProps> = ({ quantity, onChange }) => {
+  const [value, setValue] = useState('1');
 
   const data = Array.from({ length: quantity }, (_, index) => ({
     label: (index + 1).toString(),
@@ -37,8 +38,9 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ quantity }) => {
         valueField="value"
         placeholder="1"
         value={value}
-        onChange={item => {
-          setValue(item.value);
+        onChange={(item: unknown) => {
+          onChange((item as { value: string }).value);
+          setValue((item as { value: string }).value);
         }}
         renderItem={renderItem}
       />
