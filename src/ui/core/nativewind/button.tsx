@@ -1,11 +1,12 @@
-import clsx from "clsx";
+import clsx from 'clsx';
+import { styled } from 'nativewind';
 import { type TouchableOpacityProps } from 'react-native';
 
 import colors from '../../theme/colors';
-import { ActivityIndicator } from "./activity-indicator";
+import { ActivityIndicator } from './activity-indicator';
 import { Pressable } from './pressable';
-import { Text } from "./text"
-import { View } from "./view"
+import { Text } from './text';
+import { View } from './view';
 
 interface Props extends TouchableOpacityProps {
   label?: string;
@@ -79,6 +80,10 @@ export const buttonSizes = {
     container: 'px-[16px] py-[12px] rounded-[8px]',
     label: 'text-[16px] leading-[24px] font-normal',
   },
+  signs: {
+    container: 'px-[16px] py-[12px] rounded-[8px]',
+    label: 'text-[24px] leading-[24px] font-normal',
+  },
 } satisfies Record<string, Omit<Variant, 'indicator' | 'disabled' | 'icon'>>;
 
 export type ButtonVariant = keyof Omit<typeof buttonVariants, 'defaults'>;
@@ -93,8 +98,7 @@ interface Props extends TouchableOpacityProps {
   textClassName?: string;
 }
 
-
-export const Button = ({
+const CButton = ({
   label,
   loading = false,
   variant = 'primary',
@@ -106,13 +110,15 @@ export const Button = ({
   ...props
 }: Props) => {
   return (
-    <Pressable disabled={disabled || loading}
+    <Pressable
+      disabled={disabled || loading}
       className={clsx(
         buttonVariants.defaults.container,
         buttonVariants[variant].container,
         buttonSizes[size].container,
         disabled ? disabledVariants[variant].container : '',
-        className, 'w-full',
+        className,
+        'w-full',
       )}
       {...props}>
       {({ pressed }) =>
@@ -126,14 +132,20 @@ export const Button = ({
           <View className={clsx('flex-row items-center justify-center', contentContainerClassName)}>
             <Text
               className={clsx(
-              buttonVariants.defaults.label,
-              buttonVariants[variant].label,
-              buttonSizes[size].label,
-              pressed ? pressedVariants[variant].label : '',
-              disabled ? disabledVariants[variant].label : '',
-              textClassName,
-            )}>{label}</Text>
-          </View>)}
+                buttonVariants.defaults.label,
+                buttonVariants[variant].label,
+                buttonSizes[size].label,
+                pressed ? pressedVariants[variant].label : '',
+                disabled ? disabledVariants[variant].label : '',
+                textClassName,
+              )}>
+              {label}
+            </Text>
+          </View>
+        )
+      }
     </Pressable>
-  )
+  );
 };
+
+export const Button = styled(CButton);
