@@ -2,34 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { client } from '../common';
 import { parseAxiosError } from '../common/utils';
-
-export type Category = {
-  id: number;
-  name: string;
-  description: string;
-};
-
-export type Product = {
-  id: number;
-  title: string;
-  state: string;
-  stock: number;
-  unitPrice: string;
-  pictures: string[];
-  category: Category;
-  subcategories: Category[];
-};
-
-export type Pagination = {
-  first_url: string;
-  prev_url: string;
-  page_url: string;
-  next_url: string;
-  last_url: string;
-  count: number;
-  page: number;
-  items: number;
-};
+import type { Pagination, Product } from '../types';
 
 type Response = {
   data: Product[];

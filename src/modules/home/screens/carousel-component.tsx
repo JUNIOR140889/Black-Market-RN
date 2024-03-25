@@ -3,8 +3,8 @@ import React, { useCallback } from 'react';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
-import type { Product } from '../../../api/products/use-products';
 import { useGetItems } from '../../../api/products/use-products';
+import type { Product } from '../../../api/types';
 import TabFavoriteIcon from '../../../ui/assets/svgs/tab-favorite-icon';
 import { Image } from '../../../ui/core/nativewind/image';
 import { Text } from '../../../ui/core/text';
