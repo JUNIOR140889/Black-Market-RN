@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
+import { PaperProvider } from 'react-native-paper';
 
 import { AuthNavigator } from './auth-navigator';
 import { NavigationContainer } from './navigator-container';
@@ -23,9 +24,11 @@ export const Root = () => {
 export const RootNavigator = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <NavigationContainer>
-        <Root />
-      </NavigationContainer>
+      <PaperProvider>
+        <NavigationContainer>
+          <Root />
+        </NavigationContainer>
+      </PaperProvider>
     </QueryClientProvider>
   );
 };

@@ -13,7 +13,7 @@ import { SafeAreaView, ScrollView, View } from '../../../../ui/core/view';
 
 const Image = styled(RNImage);
 const TouchableOpacity = styled(RNTouchableOpacity);
-interface Props {
+export interface DetailsScreenProps {
   route: {
     params: {
       id: number;
@@ -21,7 +21,7 @@ interface Props {
   };
 }
 
-export const DetailsScreen: React.FC<Props> = ({ route }) => {
+export const DetailsScreen: React.FC<DetailsScreenProps> = ({ route }) => {
   const { id } = route.params;
   const { data, refetch } = useGetItemDetails(id);
   const mutate = useAddShoppingCartItems({});
@@ -126,7 +126,7 @@ export const DetailsScreen: React.FC<Props> = ({ route }) => {
                   variant="primary"
                   textClassName="font-bold text-base"
                   onPress={() => {
-                    buy(data.id, parseInt(selectedValue, 10));
+                    navigation.navigate('Payment');
                   }}
                 />
               )}

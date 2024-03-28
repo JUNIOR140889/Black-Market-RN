@@ -30,8 +30,20 @@
       "buy": "Buy",
       "shoppingCart": "My shopping cart",
       "total": "TOTAL",
+      "city": "City",
+      "country": "Country",
+      "adress_1": "Adress Line 1",
+      "adress_2": "Adress Line 2",
+      "postalCode": "Postal Code",
+      "cardNumber": "Card Number",
+      "expirationDate": "Expiration Date",
+      "cvcCode": "CVC Code",
+      "starSign": "*",
       "plusSign": "+",
-      "minusSign": "-"
+      "minusSign": "-",
+      "shippingAdress": "Please add your shipping address",
+      "paymentInformation": "Payment Information",
+      "billingAdresss": "Please add your billing address"
     },
     "errors": {
       "credentials": " Invalid credentials",
@@ -45,7 +57,9 @@
     "place_holders": {
       "email_input": "Type your email or telephone",
       "name_input": "Type your name",
-      "password_input": "Type your password"
+      "password_input": "Type your password",
+      "month_picker": "Month",
+      "year_picker": "Year"
     },
     "data_agreement": {
       "links": {
@@ -70,6 +84,9 @@
       "shipmentUpgrade": "We upgraded our shipments many levels up.",
       "poweredByFedEx": "Powered by ",
       "fedEx": "FedEx"
+    },
+    "paymentScreen": {
+      "useShippingAsBillingAdress": "Use my shipping address as my billing address"
     },
     "paymentMethods": {
       "credit": "Credit",
