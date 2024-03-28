@@ -9,7 +9,7 @@ import { View } from './view';
 
 const monthOptions = Array.from({ length: 12 }, (_, index) => ({
   label: (index + 1).toString(),
-  value: (index + 1).toString(),
+  value: index + 1,
 }));
 
 const yearOptions = [
